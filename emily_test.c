@@ -1,3 +1,4 @@
+//Last updated 9:56 AM 
 //odd numbers
 //The function will compute the dual-gradient energy function, and place it in the struct rgb_img *grad.
 #include "c_img.h"
@@ -61,4 +62,3 @@ int main(){
 
 }
 
-//UPDATED
