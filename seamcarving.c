@@ -169,48 +169,48 @@ void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
 }
 
 
-int main()
-{
-    // struct rgb_img *grad;
-    // struct rgb_img *im; 
-    // double *best_array;
-    // int *path;
-    // read_in_img(&im, "/Users/emiliemui/coding/ESC190/esc190/esc190-project2/HJoceanSmall.bin");
-    // calc_energy(im,  &grad);
-    // print_grad(grad);
-    // dynamic_seam(grad, &best_array);
-    // print_best_array(best_array, (int)grad->height, (int)grad->width);
-    // recover_path(best_array, (int)grad->height, (int)grad->width, &path);
-    // print_recovered_path(path, (int)grad->height);
-    // struct rgb_img *rm; 
-    // remove_seam(im, &rm, path); 
+// int main()
+// {
+//     // struct rgb_img *grad;
+//     // struct rgb_img *im; 
+//     // double *best_array;
+//     // int *path;
+//     // read_in_img(&im, "/Users/emiliemui/coding/ESC190/esc190/esc190-project2/HJoceanSmall.bin");
+//     // calc_energy(im,  &grad);
+//     // print_grad(grad);
+//     // dynamic_seam(grad, &best_array);
+//     // print_best_array(best_array, (int)grad->height, (int)grad->width);
+//     // recover_path(best_array, (int)grad->height, (int)grad->width, &path);
+//     // print_recovered_path(path, (int)grad->height);
+//     // struct rgb_img *rm; 
+//     // remove_seam(im, &rm, path); 
 
-    //guerzhoy tests
-    struct rgb_img *im;
-    struct rgb_img *cur_im;
-    struct rgb_img *grad;
-    double *best;
-    int *path;
+//     //guerzhoy tests
+//     struct rgb_img *im;
+//     struct rgb_img *cur_im;
+//     struct rgb_img *grad;
+//     double *best;
+//     int *path;
 
-    read_in_img(&im, "HJoceanSmall.bin");
+//     read_in_img(&im, "HJoceanSmall.bin");
     
-    for(int i = 0; i < 5; i++){
-        printf("i = %d\n", i);
-        calc_energy(im,  &grad);
-        dynamic_seam(grad, &best);
-        recover_path(best, grad->height, grad->width, &path);
-        remove_seam(im, &cur_im, path);
+//     for(int i = 0; i < 5; i++){
+//         printf("i = %d\n", i);
+//         calc_energy(im,  &grad);
+//         dynamic_seam(grad, &best);
+//         recover_path(best, grad->height, grad->width, &path);
+//         remove_seam(im, &cur_im, path);
 
-        char filename[200];
-        sprintf(filename, "img%d.bin", i);
-        write_img(cur_im, filename);
+//         char filename[200];
+//         sprintf(filename, "img%d.bin", i);
+//         write_img(cur_im, filename);
 
 
-        destroy_image(im);
-        destroy_image(grad);
-        free(best);
-        free(path);
-        im = cur_im;
-    }
-    destroy_image(im);
-}
+//         destroy_image(im);
+//         destroy_image(grad);
+//         free(best);
+//         free(path);
+//         im = cur_im;
+//     }
+//     destroy_image(im);
+// }
