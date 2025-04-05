@@ -151,7 +151,7 @@ void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
     for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
         for (int row = 0; row < src -> height; row ++){
 
-            for (int col = 0; col < src -> width; col ++){
+            for (int col = 0; col < (src -> width) - 1; col ++){
                 //if the current index is equal to the remove index 
                 if (col != remove_index) {
                     uint8_t r = get_pixel(src, row, col, 0);
