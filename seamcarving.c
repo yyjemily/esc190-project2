@@ -150,14 +150,15 @@ void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
     //iterate through the path array 
     for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
         for (int row = 0; row < src -> height; row ++){
-
-            for (int col = 0; col < (src -> width) - 1; col ++){
+            int new_index = 0; 
+            for (int col = 0; col < (src -> width); col ++){
                 //if the current index is equal to the remove index 
                 if (col != remove_index) {
                     uint8_t r = get_pixel(src, row, col, 0);
                     uint8_t g = get_pixel(src, row, col, 1);
                     uint8_t b = get_pixel(src, row, col, 2);
-                    set_pixel(*dest, row, col, r, g, b); 
+                    set_pixel(*dest, row, new_index, r, g, b); 
+                    new_index ++;
                 }
 
             }
