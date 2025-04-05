@@ -1,4 +1,4 @@
-#include "emily_test.c"
+//#include "emily_test.c"
 #include <stdio.h>
 #include <math.h>
 
@@ -85,6 +85,30 @@ void recover_path(double *best, int height, int width, int **path) {
     }
 }
 
+void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
+    //make a new image with the address dest
+    create_img(dest, src -> height, src-> width -1); 
+
+    //iterate through the path array 
+    for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
+        for (int row = 0; row < src -> height; row ++){
+
+            for (int col = 0; col < src -> width; col ++){
+                //if the current index is equal to the remove index 
+                if (col != remove_index) {
+                    uint8_t r = get_pixel(*dest, row, col, 0);
+                    uint8_t g = get_pixel(*dest, row, col, 1);
+                    uint8_t b = get_pixel(*dest, row, col, 2);
+                    set_pixel(*dest, row, col, r, g, b); 
+                }
+
+            }
+
+        }
+        
+    }
+    write_img(*dest,"/Users/emiliemui/coding/ESC190/esc190/esc190-project2/6x5remove_seam.bin"); 
+}
 void print_recovered_path(int *path, int length) {
     printf("\n");
     for (int i = 0; i < length; i++) {

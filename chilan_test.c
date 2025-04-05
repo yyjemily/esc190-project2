@@ -148,7 +148,7 @@ int main()
     struct rgb_img *im; 
     double *best_array;
     int *path;
-    read_in_img(&im, "C:/Users/PC/esc190-project2/6x5.bin");
+    read_in_img(&im, "/Users/emiliemui/coding/ESC190/esc190/esc190-project2/6x5.bin");
     calc_energy(im,  &grad);
     print_grad(grad);
     dynamic_seam(grad, &best_array);

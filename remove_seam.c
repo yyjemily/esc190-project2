@@ -27,7 +27,7 @@ void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
     }
     write_img(*dest,"/Users/emiliemui/coding/ESC190/esc190/esc190-project2/6x5remove_seam.bin"); 
 }
-
+/*
 int main(){
     struct rgb_img *grad;
     struct rgb_img *im; 
@@ -46,3 +46,4 @@ int main(){
 
 }
 
+*/ 
