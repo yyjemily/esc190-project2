@@ -3,6 +3,7 @@
 #include "c_img.h"
 #include <stdio.h>
 #include <math.h>
+#include "seamcarving.h"
 
 int wrap_index(int x, int sz){
     //enforces wrapping around method for images at the edge 
