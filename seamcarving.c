@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "c_img.c"
+//#include "c_img.c"
 #include "c_img.h"
 #include <stdio.h>
 #include <math.h>
