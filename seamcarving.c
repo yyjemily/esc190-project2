@@ -24,9 +24,9 @@ void calc_energy(struct rgb_img *im, struct rgb_img **grad){
    for (int x = 0; x < im -> width; x++) {
     for (int y = 0; y < im -> height; y++ ){
         
-        int r = get_pixel(im, y, x, 0);
-        int b = get_pixel(im, y, x, 1);
-        int g = get_pixel(im, y, x, 2);
+        // int r = get_pixel(im, y, x, 0);
+        // int b = get_pixel(im, y, x, 1);
+        // int g = get_pixel(im, y, x, 2);
 
     //check boundary conditions for x 
         //increment columns
