@@ -157,7 +157,7 @@ void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
                     uint8_t r = get_pixel(src, row, col, 0);
                     uint8_t g = get_pixel(src, row, col, 1);
                     uint8_t b = get_pixel(src, row, col, 2);
-                    set_pixel(*dest, row, col, r, g, b); 
+                    set_pixel(dest, row, col, r, g, b); 
                 }
 
             }
