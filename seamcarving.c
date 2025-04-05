@@ -145,7 +145,7 @@ void print_recovered_path(int *path, int length) {
 
 void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
     //make a new image with the address dest
-    create_img(dest, src -> height, src-> width -1); 
+    create_img(dest, src -> height, (src-> width) -1); 
 
     //iterate through the path array 
     for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
