@@ -1,67 +1,48 @@
-//FUNCTION 1 WORKS 
-
 //The function will compute the dual-gradient energy function, and place it in the struct rgb_img *grad.
-#include "c_img.h"
-#include "c_img.c"
 #include <stdio.h>
 #include <math.h>
+#include "chilan_test.c"
 
-int wrap_index(int x, int sz){
-    //enforces wrapping around method for images at the edge 
-    return (x + sz)% sz;
+void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
+    //make a new image with the address dest
+    create_img(dest, src -> height, src-> width -1); 
 
-}
+    //iterate through the path array 
+    for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
+        for (int row = 0; row < src -> height; row ++){
 
-void calc_energy(struct rgb_img *im, struct rgb_img **grad){
-    //change location that it writes to depending on who's testing
-    //for each pixel get the rbg calculate gradient, set to the gradient matrix at that index 
-    
-    //malloc space for the gradient matrix 
-    *grad = (struct rgb_img *)malloc(sizeof(struct rgb_img));
-    (*grad)->height = im -> height;
-    (*grad)->width = im -> width;
-    (*grad)->raster = (uint8_t *)malloc(3 * im -> height * im -> width);
+            for (int col = 0; col < src -> width; col ++){
+                //if the current index is equal to the remove index 
+                if (col != remove_index) {
+                    uint8_t r = get_pixel(*dest, row, col, 0);
+                    uint8_t g = get_pixel(*dest, row, col, 1);
+                    uint8_t b = get_pixel(*dest, row, col, 2);
+                    set_pixel(*dest, row, col, r, g, b); 
+                }
 
-   for (int x = 0; x < im -> width; x++) {
-    for (int y = 0; y < im -> height; y++ ){
+            }
+
+        }
         
-        int r = get_pixel(im, y, x, 0);
-        int b = get_pixel(im, y, x, 1);
-        int g = get_pixel(im, y, x, 2);
-
-    //check boundary conditions for x 
-        //increment columns
-        int r_diff_x = get_pixel(im, y, wrap_index(x+1, im -> width), 0) - get_pixel(im, y, wrap_index(x-1, im -> width), 0);
-        int b_diff_x = get_pixel(im, y, wrap_index(x+1, im -> width), 1) - get_pixel(im, y, wrap_index(x-1, im -> width), 1);
-        int g_diff_x = get_pixel(im, y, wrap_index(x+1, im -> width), 2) - get_pixel(im, y, wrap_index(x-1, im -> width), 2);
-
-        //increments rows 
-        int r_diff_y = get_pixel(im, wrap_index(y+1, im -> height), x, 0) - get_pixel(im, wrap_index(y-1, im -> height), x, 0);
-        int b_diff_y = get_pixel(im, wrap_index(y+1, im -> height), x, 1) - get_pixel(im, wrap_index(y-1, im -> height), x, 1);
-        int g_diff_y = get_pixel(im, wrap_index(y+1, im -> height), x, 2) - get_pixel(im, wrap_index(y-1, im -> height), x, 2);
-        
-
-    //calculate the gradient 
-        int grad_x = (pow(r_diff_x, 2) + pow(g_diff_x, 2) + pow(b_diff_x, 2));
-        int grad_y = (pow(r_diff_y, 2) + pow(g_diff_y, 2) + pow(b_diff_y, 2)); 
-        int energy = (int)sqrt(grad_x + grad_y); 
-
-    //calc dual energy 
-        int dual_energy = (uint8_t)(energy/10); 
-        
-        set_pixel(*grad, y, x, dual_energy, dual_energy ,dual_energy); 
     }
-   }
-
+    write_img(*dest,"/Users/emiliemui/coding/ESC190/esc190/esc190-project2/6x5remove_seam.bin"); 
 }
 
-
-/*
 int main(){
     struct rgb_img *grad;
     struct rgb_img *im; 
-    read_in_img(&im, "C:/Users/PC/esc190-project2/3x4.bin");
+    read_in_img(&im, "/Users/emiliemui/coding/ESC190/esc190/esc190-project2/6x5.bin");
     calc_energy(im,  &grad);
     print_grad(grad);
+
+    //best array test 
+    double *best_array;
+    int *path;
+    dynamic_seam(grad, &best_array);
+    print_best_array(best_array, (int)grad->width, (int)grad->height);
+    recover_path(best_array, (int)grad->width, (int)grad->height, &path);
+    print_recovered_path(path, (int)grad->height);
+
+
 }
-*/
+
