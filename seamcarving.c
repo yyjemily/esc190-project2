@@ -143,50 +143,29 @@ void print_recovered_path(int *path, int length) {
     }
 }
 
-// void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
-//     //make a new image with the address dest
-//     create_img(dest, src -> height, (src-> width) -1); 
+void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path){
+    //make a new image with the address dest
+    create_img(dest, src -> height, (src-> width) -1); 
 
-//     //iterate through the path array 
-//     for (int remove_index = 0 ; remove_index < sizeof(*path)/sizeof(path[0]); remove_index ++){
-//         for (int row = 0; row < src -> height; row ++){
-//             int new_index = 0; 
-//             for (int col = 0; col < (src -> width); col ++){
-//                 //if the current index is equal to the remove index 
-//                 if (col != remove_index) {
-//                     uint8_t r = get_pixel(src, row, col, 0);
-//                     uint8_t g = get_pixel(src, row, col, 1);
-//                     uint8_t b = get_pixel(src, row, col, 2);
-//                     set_pixel(*dest, row, new_index, r, g, b); 
-//                     new_index ++;
-//                 }
+    //iterate through the path array 
+        for (int row = 0; row < src -> height; row ++){
+            int new_index = 0; 
+            for (int col = 0; col < (src -> width); col ++){
+                //if the current index is equal to the remove index 
+                if (col != path[row]) {
+                    uint8_t r = get_pixel(src, row, col, 0);
+                    uint8_t g = get_pixel(src, row, col, 1);
+                    uint8_t b = get_pixel(src, row, col, 2);
+                    set_pixel(*dest, row, new_index, r, g, b); 
+                    new_index ++;
+                }
 
-//             }
-
-//         }
-        
-//     }
-//     //write_img(*dest,"/Users/emiliemui/coding/ESC190/esc190/esc190-project2/remove_seam.bin"); 
-// }
-
-void remove_seam(struct rgb_img *src, struct rgb_img **dest, int *path)
-{
-    int width = src->width;
-    int height = src->height;
-    create_img(dest, height, width-1);
-    for(int y = 0; y < height; y++) {
-        int remove_x = path[y];
-        int new_x = 0;
-        for(int x = 0; x < width; x++) {
-            if(x != remove_x) {
-                uint8_t r = get_pixel(src, y, x, 0);
-                uint8_t g = get_pixel(src, y, x, 1);
-                uint8_t b = get_pixel(src, y, x, 2);
-                set_pixel(*dest, y, new_x, r, g, b);
-                new_x++;
             }
+
         }
-    }
+        
+    
+    //write_img(*dest,"/Users/emiliemui/coding/ESC190/esc190/esc190-project2/remove_seam.bin"); 
 }
 
 // int main()
